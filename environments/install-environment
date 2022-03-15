@@ -1,0 +1,79 @@
+
+# setup a directory for the course
+
+mkdir c++-for-python-programmers
+cd c++-for-python-programmers
+
+# install and configure pyenv
+
+git clone https://github.com/pyenv/pyenv.git ./.pyenv
+
+echo -e "export PATH=\"\$HOME/c++-for-python-programmers/.pyenv/bin:\$PATH\"\neval \"\$(pyenv init --path)\"\n" > start-pyenv
+
+chmod +x start-pyenv
+
+# start pyenv, install python, and set global python version
+
+source ./start-pyenv
+
+pyenv install 3.9.10
+
+pyenv global 3.9.10
+
+# create and start python environment
+
+python -m venv env
+
+source ./env/bin/activate
+
+
+# install cling
+
+curl https://root.cern/download/cling/cling_2020-11-05_ROOT-ubuntu2004.tar.bz2 --output cling_2020-11-05_ROOT-ubuntu2004.tar.bz2
+
+tar -xf cling_2020-11-05_ROOT-ubuntu2004.tar.bz2
+
+echo -e "export PATH=\${PATH}:\${HOME}/c++-for-python-programmers/cling_2020-11-05_ROOT-ubuntu2004/bin" > start-cling
+
+chmod +x start-cling
+
+source ./start-cling
+
+
+# upgrade pip
+
+python -m pip install --upgrade pip
+
+# install jupyter notebook and jupyterlab
+
+python -m pip install notebook
+
+python -m pip install jupyterlab
+
+# install cling jupyter kernel
+
+cd ./cling_2020-11-05_ROOT-ubuntu2004/share/cling/Jupyter/kernel
+
+python -m pip install e .
+
+jupyter-kernelspec install --user cling-cpp17
+
+cd ${HOME}/c++-for-python-programmers
+
+# install sos
+
+python -m pip install sos
+python -m pip install sos-pbs
+python -m pip install sos-notebook
+python -m sos_notebook.install
+
+# install the c++ jupyter kernel and make available for jupyterlab as well
+
+python -m pip install sos-xeus-cling
+python -m pip install jupyterlab-sos
+
+# creat a shell script to start the course environment
+
+echo -e '#!/bin/bash\nsource ./start-pyenv\nsource ./env/bin/activate\nsource ./start-cling\n' > setup-environment
+
+chmod +x setup-environment

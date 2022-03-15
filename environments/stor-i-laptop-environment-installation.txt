@@ -1,0 +1,19 @@
+
+# to install environment using provided shell script
+
+conda config --set auto_activate_base false
+sudo apt-get install libsqlite3-dev
+sudo apt-get install libssl-dev
+sudo apt-getinstall libffi-dev
+
+source ./install-environment
+
+
+# to setup installed environment
+
+source ./setup-environment
+
+
+
+
+
