@@ -65,6 +65,7 @@ cd ${HOME}/c++-for-python-programmers
 python -m pip install sos
 python -m pip install sos-pbs
 python -m pip install sos-notebook
+python -m pip install jupyter_contrib_core
 python -m sos_notebook.install
 
 # install the c++ jupyter kernel and make available for jupyterlab as well
