@@ -33,7 +33,7 @@ curl https://root.cern/download/cling/cling_2020-11-05_ROOT-ubuntu2004.tar.bz2 -
 
 tar -xf cling_2020-11-05_ROOT-ubuntu2004.tar.bz2
 
-echo -e "export PATH=\${PATH}:\${HOME}/c++-for-python-programmers/cling_2020-11-05_ROOT-ubuntu2004/bin" > start-cling
+echo -e "export PATH=\${PATH}:\${HOME}/cling_2020-11-05_ROOT-ubuntu2004/bin" > start-cling
 
 chmod +x start-cling
 
