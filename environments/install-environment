@@ -75,6 +75,6 @@ python -m pip install jupyterlab-sos
 
 # creat a shell script to start the course environment
 
-echo -e '#!/bin/bash\nsource ./start-pyenv\nsource ./env/bin/activate\nsource ./start-cling\n' > setup-environment
+echo -e '#!/bin/bash\nsource ~/start-pyenv\nsource ./env/bin/activate\nsource ~/start-cling\n' > setup-environment
 
 chmod +x setup-environment
