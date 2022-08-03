@@ -1,0 +1,222 @@
+##### check for updates
+
+1) sudo apt-get update
+
+
+ #### fix firefox
+ 
+ #remove snap firefox
+1) sudo snap remove firefox
+
+#add repo
+1) sudo add-apt-repository ppa:mozillateam/ppa
+ 
+#set repo pref for firefox
+3) echo '
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+
+#set unattended upgrades to non-snap
+4) echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+#install non-snap firefox
+5) sudo apt install firefox
+
+
+#### setup luna
+
+1) sudo nano /etc/fstab
+
+2) Edit the bottom line by removing the '#' to un-comment, and replacing <username> with your actual username.
+
+3) type ctrl-O to save the file.
+
+4) type ctrl-X to exit
+
+5) sudo mkdir luna
+
+6) enter 
+
+mount.cifs //luna.lancs.ac.uk/FST/MA/Stor-i/<username> /luna
+
+at the command prompt having replced <username> with your actual username
+
+
+#### install additional development libraries
+
+1) sudo apt-get install libsqlite3-dev
+
+2) sudo apt-get install libssl-dev
+
+3) sudo apt-get install libffi-dev
+
+4) sudo apt-get install zlib1g-dev
+
+5) sudo apt-get install libncurses5-dev libncursesw5-dev
+
+6) sudo apt-get install libreadline6 libreadline6-dev
+
+7) sudo apt-get install libreadline-dev
+
+8) sudo apt-get install  libbz2-dev
+
+9) sudo apt-get install python-tk
+
+10) sudo apt-get install python3-tk
+
+11) sudo apt-get install tk-dev
+
+12) sudo apt-get install lzma
+
+13) sudo apt-get install liblzma-dev
+
+
+################  install git
+
+1) sudo apt-get install git
+
+
+############### install and configure pyenv   #######  installation is broken !!!!!!!!!!!!!!!!
+
+1) git clone https://github.com/pyenv/pyenv.git ./.pyenv
+
+2)  echo -e "export PATH=\"\$HOME/.pyenv/bin:\$PATH\"\neval \"\$(pyenv init --path)\"\n" > start-pyenv
+
+3) chmod +x start-pyenv
+
+
+############# instal gcc
+
+1) sudo apt install build-essential
+
+
+###### start pyenv and isntall a version of python
+
+
+1) source ./start-pyenv
+
+2) pyenv install 3.9.10
+
+3) pyenv global 3.9.10
+
+#### upgrade pip
+
+1) python -m pip install --upgrade pip
+
+#### install R
+
+1) sudo apt-get install r-base
+
+
+##### create STOR-601 python environment
+
+1) mkdir STOR-601-env
+
+2) cd STOR-601-env
+
+3) python -m venv env
+
+4) source ./env/bin/activate
+
+5) python -m pip install --upgrade pip
+
+##### add R package library and create activation script
+
+1) mkdir R-packages
+
+2) echo -e "export R_LIBS_SITE=\"\$HOME/STOR-601-env/R-packages\"\nexport R_LIBS_USER=\"\$HOME/STOR-601-env/R-packages\"\n" > start-r-env
+
+3) chmod +x start-r-env
+
+
+######  install and run jupyter notebook
+
+1) python -m pip install notebook
+
+2) jupyter notebook
+
+
+
+##### install curl
+
+1) sudo apt-get install curl
+
+###### install bunzip
+
+1) sudo apt-get install bzip2
+
+###### install cling
+
+1) curl https://root.cern/download/cling/cling_2020-11-05_ROOT-ubuntu2004.tar.bz2 --output cling_2020-11-05_ROOT-ubuntu2004.tar.bz2
+
+2) tar -xf cling_2020-11-05_ROOT-ubuntu2004.tar.bz2
+
+3) echo -e "export PATH=\${PATH}:\${HOME}/STOR-601-env/cling_2020-11-05_ROOT-ubuntu2004/bin" > start-cling
+
+4) chmod +x start-cling
+
+
+to start cling (if required)
+
+5) source ./start-cling
+
+6) cling
+
+
+###### install jupyter lab
+
+1) python -m pip install jupyterlab
+
+###### install cling kernel
+
+1) cd ~/STOR-601-env/cling_2020-11-05_ROOT-ubuntu2004/share/cling/Jupyter/kernel
+
+2) python -m pip install e .
+
+3) jupyter-kernelspec install --user cling-cpp17
+
+4) cd ~/STOR-601-env
+
+
+###### Install SOS
+
+1) python -m pip install sos
+
+2) python -m pip install sos-pbs
+
+3) python -m pip install sos-notebook
+
+4) python -m pip install jupyter_contrib_core
+
+5) python -m sos_notebook.install
+
+6) python -m pip install sos-xeus-cling
+
+7) python -m pip install jupyterlab-sos
+
+##### install R kernel for jupyter
+
+1) source start-r-env
+
+2) echo -e 'install.packages("IRkernel")\nlibrary(IRkernel)\nIRkernel::installspec()\n' > install-r-jupyter-kernel.R
+
+3) R --no-save < install-r-jupyter-kernel.R
+
+4) rm install-r-jupyter-kernel.R
+
+######  create a start up script
+
+1) echo -e '#!/bin/bash\nsource ~/start-pyenv\nsource ./env/bin/activate\nsource ./start-cling\nsource ./start-r-env\n' > setup-environment
+
+2) chmod +x setup-environment
+
+
+
+
+
+
+
+
+
