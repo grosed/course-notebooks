@@ -1,4 +1,3 @@
-
 # check for updates
 sudo apt-get update
 
@@ -71,7 +70,6 @@ chmod +x start-r-env
 
 # install and run jupyter notebook
 python -m pip install notebook
-jupyter notebook
 
 # install curl
 sudo apt-get install curl
