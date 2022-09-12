@@ -12,16 +12,18 @@ sudo nano /etc/fstab
 
 
 
-#Edit the bottom line by removing the '#' to un-comment, and replacing <username> with your actual username.
+#Edit the bottom line by removing the '#' to un-comment, and replacing <username> with your actual username and
+replace /luna with /home/<username>/luna
 
 
 
 #Save by pressing cmd+o (write out); you'll be asked to confirm the file to write out(just hit enter), and then cmd+x to exit.
 
+# Now make a directory for luna 
 
+mkdir /home/<username>/luna
 
 #Next, run the following line in terminal replacing <username> with your actual username.
-
 
 
 mount.cifs //luna.lancs.ac.uk/FST/MA/Stor-i/<username> /luna 
