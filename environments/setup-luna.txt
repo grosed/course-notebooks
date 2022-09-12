@@ -1,0 +1,34 @@
+
+
+
+
+#Do the following to mount your new network storage area.
+
+
+
+sudo nano /etc/fstab	
+
+#This will open the file 'fstab' in the text editor 'nano'.
+
+
+
+#Edit the bottom line by removing the '#' to un-comment, and replacing <username> with your actual username.
+
+
+
+#Save by pressing cmd+o (write out); you'll be asked to confirm the file to write out(just hit enter), and then cmd+x to exit.
+
+
+
+#Next, run the following line in terminal replacing <username> with your actual username.
+
+
+
+mount.cifs //luna.lancs.ac.uk/FST/MA/Stor-i/<username> /luna 
+
+#This will mount your new storage to the root directory /luna.
+
+
+
+#You can also map this as a drive in Windows. To do this open up a new file explorer window, click on 'This PC' on the right hand menu, then under the 'Computer' tab at the top click 'Map Network Drive'. Simply give it a letter and enter the path \\luna\fst\ma\stor-i\<username> , substituting <username> with your username as before.
+
