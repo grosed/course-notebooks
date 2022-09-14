@@ -1,0 +1,232 @@
+attach(lmedata1)
+names(lmedata1)
+
+fac<-factor(fac)
+plot(fac,y)
+
+mean(y)
+
+sqrt(var(y))
+
+model1<-aov(y~fac)
+summary(model1)
+
+(19.81249-2.69022)/6
+
+model2<-lme(y~1,random=~1|fac)
+
+summary(model2)
+
+1.64019 ^2
+
+1.689293 ^2
+
+model3<-update(model2,random=~1)
+anova(model2,model3)
+
+attach(lmedata2)
+names(lmedata2)
+
+interaction.plot(machine,operator,y)
+
+operator<-factor(operator)
+machine<-factor(machine)
+model1<-aov(y~machine/operator)
+summary(model1)
+
+model2<-lme(y~1,random=~1|machine/operator)
+summary(model2)
+
+model3<-lme(y~1,random=~1|machine)
+
+anova(model2,model3)
+
+attach(lmedata3)
+names(lmedata3)
+
+plot(Age,Weight,type="n")
+for (i in 1:60) 
+        points(Age[Genotype==Genotype[i]],Weight[Genotype==Genotype[i]],
+        pch=ceiling(i/10))
+
+xyplot(Weight~Age|Genotype,pch=16)
+
+model1<-lm(Weight~Age*Genotype)
+summary(model1)
+
+model2<-lme(Weight~Age,random=~1|Genotype)
+summary(model2)
+
+model3<-lme(Weight~Age,random=~Age|Genotype)
+summary(model3)
+anova(model3,model2)
+
+attach(pig)
+names(pig)
+
+pig.wt<-c(t1,t2,t3,t4,t5,t6,t7,t8,t9)
+
+pig.id<-c(rep(Pig,9))
+
+pig.time<-c(rep(c(1:9),each=48))
+
+pigs<-data.frame(cbind(pig.time,pig.id,pig.wt))
+
+pig.growth<-groupedData(pig.wt~pig.time|pig.id,data=pigs)
+
+plot(pig.growth,outer=~1)
+
+plot(pig.growth)
+
+model<-lme(pig.growth)
+
+summary(model)
+
+coef(model)
+plot(model)
+
+time<-as.numeric(pig.time)
+model.ancova<-lm(pig.wt~pig.id*time)
+summary(model.ancova)
+
+attach(soil)
+names(soil)
+
+growth<-groupedData(height~days|subject,outer=~mix)
+
+plot(growth)
+
+plot(growth,outer=T)
+
+model1<-lme(fixed=height~days*mix,random= ~days|subject,data=growth)
+summary(model1)
+
+plot(model1)
+
+plot(model1, resid(.)~fitted(.) | mix)
+
+ranef(model1)
+
+plot(ranef(model1))
+
+model2<-update(model1,weights=varIdent(form= ~1|mix))
+
+anova(model1,model2)
+
+model3<-update(model1,weights=varPower(form= ~ fitted(.)))
+anova(model1,model3)
+
+model4<-update(model1, corr=corAR1())
+anova(model1,model4)
+
+model5<-update(model1,random=pdDiag(~days))
+anova(model1,model5)
+
+attach(Ovary)
+names(Ovary)
+
+tsplot(follicles)
+
+ovaries<-groupedData(follicles~Time|Mare)
+plot(ovaries)
+
+t<-seq(-0.1,1.1,.01)
+plot(t,sin(2*pi*t)+cos(2*pi*t),type="l")
+
+model1<-lme(follicles~sin(2*pi*Time)+cos(2*pi*Time),data=ovaries)
+model1
+
+plot(t,12.182-3.296678*sin(2*pi*t)-0.8731409*cos(2*pi*t),ylab="follicles",type="l")
+
+AIC(model1)
+
+model2<-lme(follicles~sin(2*pi*Time)+cos(2*pi*Time),data=ovaries,
+         random=pdDiag(~sin(2*pi*Time))) 
+AIC(model1,model2)
+
+plot(ACF(model1))
+
+model3<-update(model1,correlation=corAR1())
+AIC(model1,model3)
+
+model4<-update(model3,correlation=corARMA(p=1,q=1))
+AIC(model3,model4)
+
+model6<-lme(fixed=height~days*mix,random= ~days|subject,data=growth,method="ML")
+model7<-lme(fixed=height~days+mix,random= ~days|subject,data=growth,method="ML")
+anova(model6,model7)
+
+attach(repeated)
+names(repeated)
+
+coplot(Grass ~ Time | Block)
+
+model<-aov(Grass~Insect*Mollusc+Error(Block))
+summary(model)
+
+tapply(Grass,list(Insect,Mollusc), mean)
+
+model<-aov(Grass~Block*Insect*Mollusc*Time)
+summary(model)
+
+for (i in 1:6 ) print(summary(aov(Grass~Insect*Mollusc+Error(Block),subset=(Time==i))))
+
+g<-as.vector(tapply(Grass,list(Insect,Mollusc,Block),mean))
+
+b<-as.vector(tapply(as.numeric(Block),list(Insect,Mollusc,Block),mean))
+b<-levels(Block)[b]
+m<-as.vector(tapply(as.numeric(Mollusc),list(Insect,Mollusc,Block),mean))
+m<-levels(Mollusc)[m]
+i<-as.vector(tapply(as.numeric(Insect),list(Insect,Mollusc,Block),mean))
+i<-levels(Insect)[i]
+
+b
+i
+m
+
+model<-aov(g~i*m+Error(b))
+summary(model)
+
+a<-1:20
+Code<-gl(20,6)
+for (k in 1:20) a[k]<-coef(lm(Grass~Time,subset=(Code==k)))[1]
+
+a
+
+model<-aov(a~i*m+Error(b))
+summary(model)
+
+aa<-1:20
+for (k in 1:20) aa[k]<-coef(lm(Grass~Time,subset=(Code==k)))[2]
+aa
+
+model<-aov(aa~i*m+Error(b))
+summary(model)
+
+tapply(aa,list(m,i),mean)
+
+yield<-groupedData(Grass~Time|Block/Insect/Mollusc,data=repeated,outer=~Insect*Mollusc)
+
+plot(yield)
+
+plot(yield, outer = ~ Insect*Mollusc)
+
+model<-lme(Grass~Insect*Mollusc,random=~Time|Block)
+summary(model)
+
+plot(model, resid(., type="p")~fitted(.)|Block)
+
+model<-lme(fixed=Grass~Insect*Mollusc,random=~Time|Block)
+model2<-lme(fixed=Grass~Insect+Mollusc,random=~Time|Block)
+anova(model,model2)
+
+model3<-update(model, method="ML")
+model4<-update(model2, method="ML")
+anova(model3,model4)
+
+
+
+
+
+
+

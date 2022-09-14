@@ -1,0 +1,106 @@
+mcheck <- function (obj, ... ) {
+	rs<-obj$resid
+	fv<-obj$fitted
+	par(mfrow=c(1,2))
+	plot(fv,rs,xlab="Fitted values",ylab="Residuals")
+	abline(h=0, lty=2)
+	qqnorm(rs,xlab="Normal scores",ylab="Ordered residuals")
+	qqline(rs,lty=2)
+	par(mfrow=c(1,1))
+	invisible(NULL)
+}
+
+x<-0:30
+
+e<-rnorm(31,mean=0,sd=5)
+yn<-10+x+e
+mn<-lm(yn~x)
+
+mcheck(mn)
+
+eu<-20*(runif(31)-0.5)
+yu<-10+x+eu
+mu<-lm(yu~x)
+
+mcheck(mu)
+
+enb<-rnbinom(31,2,.3)
+ynb<-10+x+enb
+mnb<-lm(ynb~x)
+
+mcheck(mnb)
+
+eg<-rgamma(31,1,1/x)
+yg<-10+x+eg
+mg<-lm(yg~x)
+
+mcheck(mg)
+
+x<-c(2,3,3,3,4)
+y<-c(2,3,2,1,2)
+
+par(mfrow=c(1,2))
+
+plot(x,y,xlim=c(0,8,),ylim=c(0,8))
+
+x1<-c(x,7)
+y1<-c(y,6)
+
+plot(x1,y1,xlim=c(0,8,),ylim=c(0,8))
+abline(lm(y1~x1))
+reg<-lm(y1~x1)
+summary(reg)
+
+leverage<-function(x){ 1/length(x)+(x-mean(x))^2/sum((x-mean(x))^2) }
+
+leverage(x1)
+
+plot(leverage(x1))
+
+h<-leverage(x1)
+
+plot(h,type="h")
+points(h)
+abline(0.66,0,lty=2)
+
+reg2<-lm(y1[-6]~x1[-6])
+
+summary(reg2)
+
+w<-c(1,1,1,1,1,0)
+w<-(x1<6)
+w
+
+reg3<-lm(y1~x1,weights=w)
+summary(reg3)
+
+reg4<-lm(y1~x1,subset=(x1<6))
+summary(reg4)
+
+attach(regression)
+names(regression)
+
+growth
+
+model<-lm(growth~1)
+
+AIC(model)
+
+attach(ipomopsis)
+model.1<-lm(Fruit~Grazing*Root)
+model.2<-lm(Fruit~Grazing+Root)
+AIC(model.1,  model.2)
+
+-2*logLik(model.1)+2*(4+1)
+
+-2*logLik(model.2)+2*(3+1)
+
+attach(Decay)
+names(Decay)
+
+plot(x,y,pch=16)
+
+model<-lm(y~x)
+
+plot(model)
+

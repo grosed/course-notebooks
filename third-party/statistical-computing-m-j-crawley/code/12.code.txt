@@ -1,0 +1,138 @@
+x<-0:9
+x
+
+sample(x)
+
+mean(x)
+
+mean(sample(x))
+
+sample(rep(c("A","B","C","D"),5))
+
+sample(x,replace=T)
+
+table(sample(x,replace=T))
+
+table(sample(x,replace=T))
+
+for (i in 1:6) print (mean(sample(x,replace=T)))
+
+xmeans<-numeric(10000)
+
+for (i in 1:10000) xmeans[i]<-mean(sample(x,replace=T))
+
+mean(xmeans)
+
+hist(xmeans)
+
+quantile(xmeans,c(.025,.975))
+
+se<-sqrt(var(x)/length(x))
+
+tvalue<-qt(.975,length(x))
+
+ci<-tvalue*se
+ci
+
+mean(x)+ci
+
+mean(x)-ci
+
+attach(Light)
+names(Light)
+
+mean(speed)
+
+d<-numeric(10000)
+for (i in 1:10000) d[i]<-mean(sample(speed,replace=T))
+
+hist(d)
+quantile(d,.975)
+
+bootstrap(speed,mean)
+
+sqrt(var(speed)/length(speed))
+
+bs<-bootstrap(speed,mean)
+plot(bs)
+summary(bs)
+
+jk<-numeric(20)
+for (i in 1:20) jk[i]<-mean(speed[-i])
+hist(jk)
+
+jackknife(speed,mean)
+
+attach(regression)
+names(regression)
+
+bs<-bootstrap(regression,coef(lm(growth~tannin)))
+bs
+
+jack.after.bootstrap(bs)
+
+attach(slugsurvey)
+names(slugsurvey)
+
+levels(field)
+
+tapply(slugs,field,mean)
+
+field
+
+sample(field)
+
+diff<-numeric(10000)
+for (i in 1:10000) {
+fieldname<-sample(field)
+diff[i]<-tapply(slugs,fieldname,mean)[2]-tapply(slugs,fieldname,mean)[1] }
+
+quantile(diff,0.975)
+
+quantile(diff,0.995)
+nursery<-slugs[field=="Nursery"]
+rookery<-slugs[field=="Rookery"]
+mean(nursery)
+
+mean(rookery)
+
+nmeans<-numeric(10000)
+for (i in 1:10000) nmeans[i]<-mean(sample(nursery,replace=T))
+quantile(nmeans,c(.025,.975))
+
+rmeans<-numeric(10000)
+for (i in 1:10000) rmeans[i]<-mean(sample(rookery,replace=T))
+quantile(rmeans,c(.025,.975))
+
+attach(factories)
+names(factories)
+
+tapply(rate,factory,mean)
+
+tapply(rate,treatment,mean)
+
+model<-aov(rate~treatment+Error(factory))
+summary(model)
+
+treats<-NULL
+for(i in 1:7) treats<-c(treats,sample(levels(treatment)))
+
+treats<-factor(treats)
+
+summary(model)[[2]]$"F Value"[1]
+
+d<-numeric(1000)
+for(j in 1:1000) {
+treats<-NULL
+for(i in 1:7) treats<-c(treats,sample(levels(treatment)))
+treats<-factor(treats)
+d[j]<-summary(aov(rate~treats))$"F Value"[1] }
+
+hist(d)
+
+max(d)
+
+quantile(d,0.95)
+
+qf(.95,4,24)
+

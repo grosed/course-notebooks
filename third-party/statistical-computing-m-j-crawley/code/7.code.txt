@@ -1,0 +1,90 @@
+ht<-seq(150,190,0.01)
+plot(ht,dnorm(ht,170,8),type="l")
+
+pnorm(-1.25)
+
+pnorm(1.875)
+
+1-pnorm(1.875)
+
+pnorm(1.25)-pnorm(-0.625)
+
+attach(regression)
+names(regression)
+
+growth
+
+sum((growth-mean(growth))^2)
+
+108.88889 / 9
+
+-9/2*log(2 * pi)-9 * log(12.09877^0.5)-108.8889/(2*12.09877)
+
+
+model<-lm(growth~1)
+
+logLik(model)
+
+dnorm(1)
+
+z<-seq(-2.5,2.5,0.05)
+y<-dnorm(z)
+plot(z,y,type="l")
+
+y<-pnorm(z)
+plot(z,y,type="l")
+
+p<-seq(0,1,0.01)
+plot(p,qnorm(p),type="l")
+
+qnorm(c(0.005,0.995))
+
+hist(rnorm(1000,10,2))
+
+dist<-function(x){
+	x[x<0]<-0
+	xm<-mean(x)
+	xs<-sqrt(var(x))
+	xl<-length(x)
+	lowx<-min(-3,(min(x)-mean(x))/xs)
+	highx<-max(3,(max(x)-mean(x))/xs)
+	xv<-seq(lowx*xs,highx*xs,(highx-lowx)/100)
+	xv<-xv+xm
+	hist(x,breaks=-0.5:25.5)
+	lines(xv,xl*dnorm(xv,xm,xs)) }
+
+par(mfrow=c(2,2))
+dist(rnorm(1000,10,1))
+dist(rnorm(1000,10,2))
+dist(rnorm(1000,10,3))
+dist(rnorm(1000,10,4))
+
+attach(fishes)
+names(fishes)
+
+mean(mass)
+
+max(mass)
+
+par(mfrow=c(1,1))
+
+hist(mass,breaks=-0.5:16.5)
+
+lines(seq(0,16,0.1),length(mass)*dnorm(seq(0,16,0.1),mean(mass),sqrt(var(mass))))
+
+par(mfrow=c(1,2))
+y<-rnbinom(1000,1,0.2)
+mean(y)
+
+var(y)
+
+table(y)
+
+hist(y,breaks=-0.5:38.5)
+
+my <- numeric(1000)
+for (i in 1:1000) {
+		y <- rnbinom(30, 1, 0.2)
+       	my[i] <- mean(y) }
+hist(my)
+

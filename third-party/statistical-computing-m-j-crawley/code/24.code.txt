@@ -1,0 +1,150 @@
+attach(timber)
+names(timber)
+
+pairs(timber)
+
+cloud(volume~girth*height)
+
+coplot(volume~girth|height)
+
+y<-c(12,10,8,11,6,7,2,3,3)
+one<-rep(1,9)
+
+t(one) %*% one
+
+x<-0:8 
+x
+
+X<-cbind(1,x)
+X
+
+Xp <- t(X)
+Xp
+
+t(y) %*% y
+
+t(one) %*% y
+
+t(y) %*% one %*% t(one) %*% y
+
+Xp %*% X
+
+Xp %*% y
+
+XM<-Xp %*% X
+ginverse(XM)
+
+b<-ginverse(XM) %*% Xp %*% y
+b
+
+CF<-t(y) %*% one %*% t(one) %*% y / 9
+CF
+
+t(y) %*% y - CF
+
+t(b) %*% t(X) %*% y - CF
+
+t(y) %*% y  -  t(b) %*% t(X) %*% y
+
+timber
+
+girth<-girth/100
+
+y<-volume
+
+X<-cbind(1,girth,height)
+
+Xp Xp<-t(X)
+
+Xp %*% X
+
+Xp %*% y
+
+ginverse(Xp%*%X)
+
+ginverse(Xp %*% X) %*% Xp %*% y
+
+lm(volume~girth+height)
+
+CF<-t(volume) %*% t(one) %*% one %*% volume /  31
+CF
+
+sst<-t(volume) %*% volume - CF
+sst
+
+ssr<-t(b) %*% Xp %*% volume - CF
+ssr
+
+sse<-t(volume) %*% volume -  t(b) %*% Xp %*% volume
+sse
+
+model<-aov(volume~girth+height)
+summary(model)
+
+attach(Pollute)
+names(Pollute)
+
+pairs(Pollute)
+
+model1<-lm(Pollution~Temp+Industry+Population+Wind+Rain+Wetdays)
+summary(model1)
+
+model2<-update(model1, ~ .  - Wetdays)
+
+anova(model1,model2)
+
+step(model1)
+
+model3<-update(model2, ~ .  - Wind)
+anova(model2,model3)
+
+summary(model3)
+
+model4<-update(model3,~. -Rain)
+anova(model3,model4)
+
+summary(model4)
+
+model5<-update(model4,~. -Temp)
+anova(model4,model5)
+
+summary(model5)
+
+model6<-update(model5,~. -Population)
+anova(model5,model6)
+
+model7<-update(model1,~. -Temp)
+anova(model1,model7)
+
+t2<-Temp^2
+i2<-Industry^2
+p2<-Population^2
+w2<-Wind^2
+r2<-Rain^2
+d2<-Wetdays^2
+
+model10<-lm(Pollution~Temp+Industry+Population+Wind
+                                           +Rain+Wetdays+t2+i2+p2+w2+r2+d2)
+summary(model10)
+
+interactions<-c("ti","tp","tw","tr","td","ip","iw","ir","id","pw","pr","pd","wr","wd","rd")
+sample(interactions)
+
+model12<-update(model1,~. + Industry:Wind+Population:Rain+Wind:Rain+Population:Wind+Temp:Wind)
+
+summary(model12)
+
+model13<-update(model1,~. +Population:Wetdays+Industry:Wetdays+
+       Industry:Population+Rain:Wetdays+Industry:Rain )
+       
+summary(model13)
+
+model14<-update(model1,~. +Wind:Wetdays+Temp:Population+
+       Temp:Wetdays+Temp:Rain+Temp:Industry )
+summary(model14)
+
+model15<-update(model1,~. + Industry:Wind+Wind:Rain+Population:Wind
+       +Temp:Wind+Temp:Rain)
+       
+summary(model15)
+

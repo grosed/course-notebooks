@@ -1,0 +1,214 @@
+mean(c(3,6,4,7))
+
+2*(3*log(3/5)+6*log(6/5)+4*log(4/5)+7*log(7/5))
+
+2*(3*log(3/4.5)+6*log(6/4.5)+4*log(4/5.5)+7*log(7/5.5))
+
+y<-c(3,6,4,7)
+location<-factor(c("A","A","B","B"))
+
+glm(y~location,poisson)
+
+glm(y~1,family=poisson)
+
+attach(clusters)
+names(clusters)
+
+plot(Distance,Cancers)
+
+model<-glm(Cancers~Distance,family=poisson)
+summary(model)    #
+
+#  Note that in R you use “quasipoisson” for this
+
+model2<-update(model, ~ .  Distance)
+
+anova(model,model2,test="F")
+
+attach(slugsurvey)
+names(slugsurvey)
+
+plot(field,slugs)
+
+model<-glm(slugs~field,poisson)
+summary(model)
+
+model2<-update(model,~.-field)
+
+anova(model,model2,test="Chi")	   #
+
+#  Note that in R you use “quasipoisson” for this
+
+anova(model,model2,test="F")
+
+model3<-aov(log(slugs+1)~field)
+summary(model3)
+
+model4<-aov(slugs~field)
+anova(model4)
+
+model5<-aov(slugs^0.5~field)
+anova(model5)
+
+model6<-glm(slugs~field,family=quasi(link=log,variance=mu^2))
+
+summary(model6)
+
+model7<-update(model6,~.-field)
+anova(model6,model7,test="F")
+
+wilcox.test(slugs[field=="Nursery"],slugs[field=="Rookery"])
+
+attach(Species)
+names(Species)
+
+plot(Biomass,Species,type="n")
+
+points(Biomass[pH=="high"],Species[pH=="high"])
+points(Biomass[pH=="mid"],Species[pH=="mid"],pch=16)
+points(Biomass[pH=="low"],Species[pH=="low"],pch=0)
+
+model  <-glm(Species~pH*Biomass,poisson)
+summary(model)
+
+model2<-update(model,~.-pH:Biomass)
+model3<-update(model2,~.-pH)
+model4<-update(model3,~.-Biomass)
+
+anova(model,model2,model3,model4,test="Chi")
+
+x<-seq(0,10,0.1)
+length(x)
+
+levels(pH)
+
+acid<-factor(c(rep("low",101),rep("mid",101),rep("high",101))
+
+x<-c(x,x,x)
+
+lines(x[acid=="high"],predict(model,type="response",data.frame(Biomass=x,pH=acid))[acid=="high"])
+lines(x[acid=="mid"],predict(model,type="response",data.frame(Biomass=x,pH=acid))[acid=="mid"])
+lines(x[acid=="low"],predict(model,type="response",data.frame(Biomass=x,pH=acid))[acid=="low"])
+
+count<-c(13,25,44,29)
+
+smoking<-factor(c("yes","yes","no","no"))
+productivity<-factor(c("high","low","high","low"))
+
+model<-glm(count~smoking+productivity,poisson)
+
+model
+
+fitted(model)
+
+count
+
+attach(lizards)
+names(lizards)
+
+model1<-glm(n~species*sun*height*perch*time,family=poisson)
+
+summary(model1)
+
+model2<-update(model1,~.-species:sun:height:perch:time)
+anova(model1,model2,test="Chi")
+
+model3<-update(model2,~.-species:sun:height:perch)
+anova(model2,model3,test="Chi")
+
+sorted.lizards<-lizards[order(lizards[,2],lizards[,3],lizards[,4],lizards[,5],lizards[,6]),1:6]
+
+ng<-sorted.lizards[,1][sorted.lizards[,6]=="grahamii"]
+no<-sorted.lizards[,1][sorted.lizards[,6]=="opalinus"]
+y<-cbind(ng,no)
+
+
+s<-sorted.lizards[,2][sorted.lizards[,6]=="grahamii"]
+h<-sorted.lizards[,3][sorted.lizards[,6]=="grahamii"]
+p<-sorted.lizards[,4][sorted.lizards[,6]=="grahamii"]
+t<-sorted.lizards[,5][sorted.lizards[,6]=="grahamii"]
+
+
+model<-glm(y ~ s*h*p*t ,  binomial)
+
+
+step(model)
+
+
+model1<-glm(y ~ s+h+p+t+s:h+s:p+h:p+h:t+p:t+s:h:p+h:p:t,family=binomial)
+
+
+model2<-update(model1,~.-h:p:t) 
+anova(model1,model2,test="Chi")
+
+
+model2 <-update(model1,~.-h:p:t)  
+model3 <-update(model2,~.-s:h:p) 
+model4 <-update(model3,~.-p:t)   
+model5 <-update(model4,~.-h:t)   
+model6 <-update(model5,~.-h:p)   
+model7 <-update(model6,~.-s:p)   
+model8 <-update(model7,~.-s:h)   
+model9 <-update(model8,~.-t)     
+model10<-update(model8,~.-p)     
+model11<-update(model8,~.-h)        
+model12<-update(model8,~.-s)         
+
+
+
+summary(model8)
+
+
+t3<-t
+levels(t3)[c(2,3)]<-"other"
+levels(t3)
+
+
+model9<-glm(y~s+h+p+t3,binomial)
+anova(model8,model9,test="Chi")
+
+
+summary(model9)
+
+
+
+attach(induced)
+names(induced)
+
+id<-glm(Count~Tree*Aphid*Caterpillar,family=poisson)
+
+id2<-update(id , ~ . - Tree:Aphid:Caterpillar)
+
+anova(id,id2,test="Chi")
+
+id3<-update(id2 , ~ . - Aphid:Caterpillar)
+anova(id2,id3,test="Chi")
+
+wrong<-glm(Count~Aphid*Caterpillar,family=poisson)
+wrong1<-update(wrong,~. - Aphid:Caterpillar)
+anova(wrong,wrong1,test="Chi")
+
+as.vector(tapply(Count,list(Caterpillar,Tree),sum))[1]/ tapply(Count,Tree,sum) [1]
+
+as.vector(tapply(Count,list(Caterpillar,Tree),sum))[3]/ tapply(Count,Tree,sum) [2]
+
+attach(owlrings)
+names(owlrings)
+
+model<-glm(recovered~wood*year+offset(log(marked)),family=poisson)
+summary(model)
+
+model2<-update(model,~.-wood:year)
+anova(model,model2,test="Chi")[,-1]
+
+model3<-update(model2,~.-wood) 
+anova(model2,model3,test="Chi")
+
+model4<-update(model3,~.-year)
+anova(model3,model4,test="Chi")
+
+summary(model3)
+
+exp(-2.30548)
+
+exp(-0.42521)

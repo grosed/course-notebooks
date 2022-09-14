@@ -1,0 +1,143 @@
+attach(anova.data)
+plot(y)
+abline(mean(y),0)
+for(i in 1:14) lines(c(i,i), c(mean(y),y[i]))
+
+plot(y)
+lines(c(1,7.5),c(means[1],means[1]))
+lines(c(7.5,14),c(means[2],means[2]))
+for (i in 1:7) lines(c(i,i), c(means[1],y[i]))
+for (i in 8:14) lines(c(i,i), c(means[2],y[i]))
+
+model<-lm(y~f)
+plot(y)
+abline(mean(y),0)
+points(predict(model),pch=16)
+for (i in 1:14) lines(c(i,i), c(mean(y),predict(model)[i]))
+
+attach(oneway)
+names(oneway)
+
+tapply(Growth,Photoperiod,mean)
+
+Photoperiod<-ordered(Photoperiod,levels=c("Very.short","Short","Long","Very.long"))
+
+tapply(Growth,Photoperiod,mean)
+ 
+is.factor(Photoperiod)
+
+model<-aov(Growth~Photoperiod)
+
+summary(model)
+
+model.tables(model)
+
+tapply(Growth,Photoperiod,mean)
+
+mean(Growth)
+
+tapply(Growth,Photoperiod,mean)-mean(Growth)
+
+rm(Growth, Photoperiod)
+
+attach(twoway)
+names(twoway)
+
+tapply(Growth,Genotype,mean)
+
+model2<-aov(Growth~Genotype+Photoperiod)
+
+summary(model2)
+
+attach(factorial)
+names(factorial)
+
+par(mfrow=c(1,2))
+plot(diet,growth)
+plot(coat,growth)
+
+sum(growth)
+
+sum(growth)^2
+
+sum(growth^2)
+
+tapply(growth,diet,sum)
+
+tapply(growth,coat,sum)
+
+tapply(growth,list(coat,diet),sum)
+
+model<-aov(growth~diet*coat)
+summary(model)
+ 
+model2<-update(model, ~. - diet:coat)
+
+anova(model,model2)
+
+summary(model2)
+
+model3<-update(model2, ~. -diet)
+anova(model2,model3)
+
+summary(model3)
+
+tapply(growth,diet,mean)
+   
+diet2<-factor(1+(diet=="C"))
+diet2
+
+model4<-update(model3, ~. +diet2)
+
+anova(model3,model4)
+
+model5<-update(model4, ~. +diet2:coat)
+anova(model4,model5)
+
+summary(model4)
+
+attach(daphnia)
+names(daphnia)
+
+par(mfrow=c(1,3))
+plot(Water,Growth.rate)
+plot(Detergent,Growth.rate)
+plot(Daphnia,Growth.rate)
+
+model<-aov(Growth.rate~Water*Detergent*Daphnia)
+summary(model)
+
+tapply(Growth.rate,list(Detergent,Daphnia),mean)
+
+interaction.plot(Detergent,Daphnia,Growth.rate)
+
+model.tables(model,type="adj.means",se=T)
+
+factornames <- list(insects = c("plus", "minus"),
+molluscs = c("plus", "minus"),
+N = c("plus", "minus"),
+P = c("plus", "minus"),
+K = c("plus", "minus"))
+
+experiment <- fac.design(rep(2,5), factor.names = factornames,
+                       fraction =  ~ - insects:molluscs:N + N:P:K)
+experiment
+
+attach(Fungi)
+names(Fungi)
+
+model<-aov(Fungus.yield~Habitat)
+summary(model)
+
+plot(Habitat,Fungus.yield)
+
+allcomp<-multicomp(model)
+plot(allcomp)
+
+allcomp
+
+controlcomp<-multicomp(model,comparisons="mcc",control=5)
+plot(controlcomp)
+
+
+

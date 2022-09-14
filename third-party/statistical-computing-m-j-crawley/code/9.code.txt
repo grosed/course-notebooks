@@ -1,0 +1,174 @@
+attach(plotdata)
+names(plotdata)
+
+plot(x,y)
+
+plot(x,y,xlab="Explanatory variable")
+
+plot(x,y,ylab="Response variable",xlab="Explanatory variable")
+
+plot(x,y,pch=3,ylab="Response variable",xlab="Explanatory variable")
+
+plot(x,y,pch=2,ylab="Response variable",xlab="Explanatory variable")
+
+abline(lm(y~x))
+
+lines(c(0,10),c(12,4),lty=2)
+
+v<-c(2,4,6,8,10)
+
+w<-c(8,5,6,6,2)
+
+points(v,w,pch=3)
+
+abline(lm(w~v),lty=3)
+
+sex<-c("male","female")
+
+attach(SilwoodWeather)
+names(SilwoodWeather)
+
+month<-factor(month)
+
+is.factor(month)
+
+plot(month,upper)
+
+attach(compexpt)
+names(compexpt)
+
+y<-tapply(biomass,clipping,mean)
+
+summary(aov(biomass~clipping))
+
+qt(0.975,5)
+
+sqrt(4960.81/6)
+
+z<-rep(qt(0.975,5)*sqrt(4960.81/6),5)
+
+error.bar(1:5,y,z,ylab="biomass",xlab="treatment")
+barplot(y,ylab="biomass",xlab="clipping",names=levels(clipping))
+
+y<-tapply(biomass,clipping,mean)
+
+z<-tapply(biomass,clipping,stdev)/sqrt(6)
+z
+
+xval<-barplot(y,ylab="biomass",xlab="clipping",names=levels(clipping))
+xval
+
+barplot(y,ylim=c(0,700),ylab="biomass",xlab="clipping",names=levels(clipping))
+
+error.bar(xval,y,z,gap=F,add=T)
+
+x<-seq(0,1,0.01)
+
+par(mfrow=c(1,2))
+
+plot(x, 2*x^3)
+plot(x, 2*x^3,type="line")
+
+x1<-0:5
+y1<-c(13,11,8,3,4,5)
+x2<-seq(2,12,2)
+y2<-c(8,4,6,6,1,2)
+
+par(mfrow=c(1,2))
+plot(x1,y1)
+plot(x2,y2,pch=16)
+
+range(c(x1,x2))
+
+range(c(y1,y2))
+
+plot(x1,y1,xlim=c(0,12),ylim=c(0,15))
+plot(x2,y2,xlim=c(0,12),ylim=c(0,15),pch=16)
+
+plot(x1,y1,xlim=c(0,12),ylim=c(0,15))
+text(10,14,"(a)",cex=2)
+plot(x2,y2,xlim=c(0,12),ylim=c(0,15),pch=16)
+text(10,14,"(b)",cex=2)
+
+labels<-letters[1:10]
+labels
+
+plot(1:10,1:10,type="n")
+text(1:10,1:10,labels,cex=2)
+plot(1:10,1:10,type="n")
+text(1:10,10:1,labels,cex=2,crt=180)
+
+attach(curvedata)
+names(curvedata)
+
+par(mfrow=c(2,2))
+
+plot(xvalues,yvalues,type="l")
+plot(xvalues,yvalues,log="y",type="l")
+plot(xvalues,yvalues,log="x",type="l")
+plot(xvalues,yvalues,log="xy",type="l")
+
+attach(Pollute)
+names(Pollute)
+
+pairs(Pollute)
+
+coplot(Pollution~Temp | Rain)
+
+regtree<-tree(Pollution ~ . , data=Pollute)
+
+plot(regtree)
+text(regtree)
+
+pchars<- function(){
+k<- -1
+plot(c(0,1),c(0,1),lab=c(0,0,0),xlab="",ylab="",type="n")
+for (i in 1:9) {
+for (j in 1:9){
+k<-k+1
+points(j/10,i/10,pch=k)   }}}
+
+pchars()
+
+attach(gales)
+names(gales)
+
+par(mar=c(5,4,4,5)+0.1)
+
+plot(year,number,ylim=c(0,2000),xlim=c(1950,2002),type="l")
+
+par(new=T,xaxs="d")
+
+plot(year,February,type="h",axes=F,ylab="")
+
+axis(side=4)
+mtext(side=4,line=3.8, "February gales")
+
+plot(year,number,ylim=c(0,2000),xlim=c(1950,2002),type="l")
+
+subplot(plot(year,February,type="h"),x=c(1980,2000),y=c(200,600))
+
+attach(nlme)
+names(nlme)
+
+
+plot(P,Height)
+lines(smooth.spline(P,Height))
+
+xyplot(Height~P | Genotype,
+        panel=function(x,y,subscripts, ...) {
+        lines(smooth.spline(x,y))
+        panel.xyplot(x,y)
+ })
+
+attach(murders)
+names(murders)
+
+coplot(murder~population|region)
+
+xyplot(murder ~ population | region, 
+       groups = as.character(state),
+       panel = function(x, y, subscripts, groups) 
+       text(x, y, groups[subscripts]))
+
+

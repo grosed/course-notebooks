@@ -1,0 +1,54 @@
+attach(Decay)
+names(Decay)
+
+plot(x,y)
+
+abline(lm(y~x),lty=2)
+
+plot(x,y,log=”y”)
+
+transformed <- lm(log(y)~x)
+summary(transformed)
+
+plot(transformed)
+
+plot(x,y)
+
+smoothx<-seq(0,30,0.1)
+
+smoothy<-exp(predict(transformed,list(x=smoothx)))
+
+lines(smoothx,smoothy)
+
+attach(sasilwood)
+ames(sasilwood)
+
+plot(log(Area),log(Species))
+
+model<-glm(Species~log(Area),poisson)
+summary(model)
+
+plot(model)
+
+table(Area)
+
+model<-glm(Species~log(Area)*(Area<10000)+log(Area)*(Area>1000),poisson)
+
+summary(model)
+
+aa<-sort(unique(Area))
+
+d<-numeric(7)
+for (i in 2:8) {
+model<-glm(Species~(Area<aa[i+1])*log(Area)+(Area>aa[i])*log(Area),poisson)
+     d[i-1]<-deviance(model)        }
+
+plot(d, type=”b”)
+
+model1<-lm(log(Species)~log(Area),subset=(Area<1000))
+model2<-lm(log(Species)~log(Area),subset=(Area>100))
+plot(log(Area),log(Species))
+abline(model1)
+abline(model2)
+
+

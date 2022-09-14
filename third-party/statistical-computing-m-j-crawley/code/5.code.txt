@@ -1,0 +1,52 @@
+factorial(4)
+
+choose(7,4)
+
+1/128*35
+
+
+choose(7,0:7)
+
+choose(7,0:7)/128
+
+sum(choose(7,0:7)/128)
+
+barplot(choose(7,0:7)/128)
+
+barplot(choose(7,0:7)/128,ylab="Probability",xlab="Heads",names = as.character(0:7))
+
+choose(49,6)
+
+choose(49,6)*20/(60*60*24*365)
+
+factorial(52)/(factorial(13)^4)
+
+factorial(4)*(factorial(48)/(factorial(12)^4)) /(factorial(52)/(factorial(13)^4))
+
+0.9^6*0.1
+
+sum(0.1*0.9^(0:6))
+
+x<-runif(100000)
+theta<-2*pi*runif(100000)
+left<- ifelse (x<0.5,x-0.5*abs(cos(theta)),0)
+right<- ifelse (x>=0.5,x+0.5*abs(cos(theta)),0)
+p<-(sum(left<0)+sum(right>1))/100000
+p
+
+2/p
+
+pi
+
+ceiling(6*runif(1))
+
+sum(ceiling(6*runif(3)))
+
+total<-numeric(1000)
+for (i in 1:1000) total[i]<-sum(ceiling(6*runif(3))) 
+hist(total)
+
+p<-c(1/4,1/6,1/8)
+d<-c(22,11,15.25)
+plot(p,d,type="l")
+

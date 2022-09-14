@@ -1,0 +1,244 @@
+z<-seq(-3.5,3.5,.01)
+fz<-dnorm(z)
+plot(z,fz,type="l",ylab="Probability density")
+
+pz<-pnorm(z)
+plot(z,pz,type="l",ylab="Probability")
+
+p<-seq(0,1,0.01)
+z<-qnorm(p)
+plot(p,z,type="l",ylab="Quantile (z)")
+
+y<-rnorm(1000,60,10)
+hist(y)
+
+1-pchisq(14.3,9)
+
+qchisq(.95,9)
+
+1-pf(2.85,8,12)
+
+qt(.975,10)
+
+par(mfrow=c(1,2))
+x<-seq(0,30,.25)
+plot(x,pchisq(x,3,7.25),type="l",ylab="p(x)",xlab="x")
+plot(x,pchisq(x,5,10),type="l",ylab="p(x)",xlab="x")
+
+8*10.2/qchisq(.975,8)
+
+8*10.2/qchisq(.025,8)
+
+qf(.95,2,18)
+
+x<-seq(0.05,4,0.05)
+plot(x,df(x,2,18),type="l",ylab="f(x)",xlab="x")
+plot(x,df(x,6,18),type="l",ylab="f(x)",xlab="x")
+
+df<-seq(1,30,.1)
+plot(df,qf(.95,df,30),type="l",ylab="Critical F")
+lines(df,qf(.95,df,10),lty=2)
+
+x<-seq(0.01,3,0.01)
+plot(x,df(x,1,10),type="l",ylim=c(0,1),ylab="f(x)")
+lines(x,df(x,2,10),lty=6)
+lines(x,df(x,5,10),lty=2)
+lines(x,df(x,30,10),lty=3)
+
+x<-seq(-3,3,0.01)
+fx<-(1+x^2)^(-0.5)
+plot(x,fx,type="l")
+
+plot(1:30,qt(0.975,1:30), type="l",ylab="Student's t value",xlab="d.f.")
+
+factorial(49)/(factorial(6)*factorial(49-6))
+
+p<-0.1
+n<-4
+x<-0:n
+px<-factorial(n)/(factorial(x)*factorial(n-x))*p^x*(1-p)^(n-x)
+barplot(px,names=as.character(x))
+
+plot(0:4,dbinom(0:4,4,0.1),type="l",xlab="x",ylab="p(x)")
+
+plot(0:4,pbinom(0:4,4,0.1),type="l",xlab="x",ylab="p(x)")
+
+qbinom(.025,4,0.1)
+
+qbinom(.975,4,0.1)
+
+rbinom(10,4,0.1)
+
+
+fx<-dgeom(0:20,0.2)
+plot(0:20,fx,type="l")
+
+table(rgeom(100,0.1)
+
+ph<-numeric(6)
+for (i in 0:5) ph[i]<-dhyper(i,6,14,5)
+barplot(ph,names=as.character(0:5))
+
+rhyper(20,6,14,5)
+
+multi<-function(a,b,c) { factorial(a+b+c)/(factorial(a)*factorial(b)*factorial(c))*.5^a*.25^b*.25^c}
+
+psuc<-numeric(11)
+for (i in 0:10) psuc[i]<- multi(19-i,1+i,4)
+barplot(psuc,names=as.character(0:10))
+
+count<-rpois(600,0.9)
+
+table(count)
+
+hist(count,breaks =  0.5:6.5)
+
+plot(5:100,dnbinom(5:100,5,0.1),type="l",xlab="x",ylab="f(x)") 
+
+count<-rnbinom(100,1,0.6)
+
+table(count)
+
+mean(count)
+
+var(count)
+
+x<-0:12
+freq<-c(131,55,21,14,6,6,2,0,0,0,0,2,1)
+barplot(freq,names=as.character(x),ylab="frequency",xlab="spores")
+
+y<-rep(x,freq)
+mean(y)
+
+var(y)
+
+mean(y)^2/(var(y)-mean(y))
+
+kfit <- function(x)
+{
+	lhs<-numeric()
+	rhs<-numeric()
+	y <- 0:(length(x) - 1)
+	j <- 0:(length(x) - 2)
+	m <- sum(x * y)/(sum(x))
+	s2 <- (sum(x * y^2) - sum(x * y)^2/sum(x))/(sum(x)- 1)
+	k1 <- m^2/(s2 - m)
+	a<-numeric(length(x)-1)
+	for(i in 1:(length(x) - 1))	a[i] <- sum(x[ - c(1:i)])
+	i<-0
+	for (k in seq(k1/1.2,2*k1,0.001) ) {
+	i<-i+1
+	lhs[i] <- sum(x) * log(1 + m/k)
+	rhs[i] <- sum(a/(k + j))
+		 }
+	k<-seq(k1/1.2,2*k1,0.001) 
+	plot(k, abs(lhs-rhs),xlab="k",ylab="Difference",type="l")
+	
+	d<-min(abs(lhs-rhs))
+	sdd<-which(abs(lhs-rhs)==d)	
+	k[sdd]
+}
+
+kfit(freq)
+
+nb<-238*(1+1.0042/0.582)^(-0.582)*factorial(.582+(0:12)-1)/
+            (factorial(0:12)*factorial(0.582-1))*(1.0042/(1.0042+0.582))^(0:12)
+
+both<-numeric(26)
+both[1:26 %% 2 != 0]<-freq
+both[1:26 %% 2 == 0]<-nb
+
+labs<-character(26)
+labs[1:26%%2==0]<-as.character(1:13)
+
+barplot(both,col=rep(c(1,0),13),ylab="frequency",names=labs)
+
+key(text=c("expected","observed"),rectangle=list(size=3,col=0:1),border=T)
+
+sum(((freq-nb)^2/nb)[nb>5])
+
+sum(nb>5)
+
+qchisq(0.95,2)
+
+x<-seq(0.01,4,.01)
+par(mfrow=c(2,2))
+y<-dgamma(x,.5,.5)
+plot(x,y,type="l")
+y<-dgamma(x,.8,.8)
+plot(x,y,type="l")
+y<-dgamma(x,2,2)
+plot(x,y,type="l")
+y<-dgamma(x,10,10)
+plot(x,y,type="l")
+
+qgamma(0.95,0.666666,1.333333)
+
+attach(fishes)
+names(fishes)
+
+rate<-mean(mass)/var(mass)
+shape<-rate*mean(mass)
+
+rate
+
+shape
+
+max(mass)
+
+hist(mass,breaks=-0.5:16.5)
+
+lines(seq(0.01,15,0.01),length(mass)*dgamma(seq(0.01,15,0.01),shape,rate))
+
+rexp(15,0.1)
+ 
+rbeta(20,2,3)
+
+par(mfrow=c(1,2))
+plot(-200:200,dcauchy(-200:200,0,10),type="l",ylab="p(x)",xlab="x")
+plot(-200:200,dcauchy(-200:200,0,50),type="l",ylab="p(x)",xlab="x")
+
+par(mfrow=c(1,1))
+plot(seq(0,10,0.05),dlnorm(seq(0,10,0.05)), type="l",xlab=”x”,ylab="Log Normal f(x)")
+
+par(mfrow=c(1,2))
+plot(seq(-5,5,0.02),dlogis(seq(-5,5,.02)), type="l",ylab="Logistic f(x)") plot(seq(-5,5,0.02),dnorm(seq(-5,5,.02)), type="l",ylab="Normal f(x)")
+
+hist(rstab(1000,1.5,0.6))
+
+par(mfrow=c(2,2))
+
+n[1]<-.5
+for (i in 2:100)   n[i]<-n[i-1]*2*(1-n[i-1]) 
+plot(n,type="l")
+
+n[1]<-.5
+for (i in 2:100)   n[i]<-n[i-1]*2.6*(1-n[i-1]) 
+plot(n,type="l")
+
+n[1]<-.5
+for (i in 2:100)   n[i]<-n[i-1]*3*(1-n[i-1]) 
+plot(n,type="l")
+
+n[1]<-.5
+for (i in 2:100)  n[i]<-n[i-1]*3.7*(1-n[i-1])
+plot(n,type="l")
+
+par(mfrow=c(1,1))
+
+x<-ceiling(runif(10000)*6)
+table(x)
+
+hist(x,breaks=0.5:6.5)
+
+a<-3
+l<-1
+t<-seq(0,1.8,.05)
+ft<-a*l*t^(a-1)*exp(-l*t^a)
+plot(t,ft,type="l")
+a<-1
+ft<-a*l*t^(a-1)*exp(-l*t^a)
+lines(t,ft,type="l",lty=2)
+a<-2
+ft<-a*l*t^(a-1)*exp(-l*t^a)
+lines(t,ft,type="l",lty=3)

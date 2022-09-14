@@ -1,0 +1,28 @@
+map<-rep(c("A","B","C","D"),8)
+
+matrix(sample(map),nrow=4)
+
+matrix(sample(map),nrow=4)
+
+matrix(rep(1:8,rep(4,8)),nrow=4)
+
+trt<-c("A","B","C","D")
+r<-NULL
+for (i in 1:8) r<-c(r,sample(trt))
+
+matrix(r,nrow=4)
+
+sample(trt)
+
+sample(trt[trt!="C"])
+
+sample(trt[trt!="B"& trt!="D"])
+
+sample(trt[trt != "A" &  trt != "D"])
+
+sample(trt[trt!="C"& trt!="D"])
+
+sample(trt[trt!="A"& trt!="B"])
+
+
+

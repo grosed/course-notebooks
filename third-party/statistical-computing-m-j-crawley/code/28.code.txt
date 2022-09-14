@@ -1,0 +1,197 @@
+y<-c(3,4,5,8)
+N<-c(6,10,9,12)
+N*20/37
+
+p1<-2*(3*log(3/3.243)+3*log(3/(6-3.243))+4*log(4/5.405)+6*log(6/(10-5.405)))
+p2<-2*(5*log(5/4.865)+4*log(4/(9-4.865))+8*log(8/6.486)+4*log(4/(12-6.486)))
+
+p1+p2
+
+rv<-cbind(y,N-y)
+glm(rv~1,family=binomial)
+
+p<-c(7/16,7/16,13/21,13/21)
+p*N
+
+p1<-2*(3*log(3/2.625)+3*log(3/(6-2.625))+4*log(4/4.375)+6*log(6/(10-4.375)))
+p2<-2*(5*log(5/5.571)+4*log(4/(9-5.571))+8*log(8/7.429)+4*log(4/(12-7.429)))
+
+p1+p2
+
+treatment<-factor(c("A","A","B","B"))
+
+glm(rv~treatment,family=binomial)
+
+
+attach(bioassay)
+names(bioassay)
+
+pkill<-dead/batch
+
+plot(log(dose),pkill)
+
+abline(lm(pkill~log(dose)))
+
+logit<-log(pkill/(1-pkill))
+plot(log(dose),logit)
+abline(lm(logit~log(dose)))
+
+y<-cbind(dead,batch-dead)
+
+model<-glm(y~log(dose),family=binomial)
+summary(model)
+
+mcheck <- function (obj, ... ) {
+	rs<-obj$resid
+	fv<-obj$fitted
+	par(mfrow=c(1,2))
+	plot(fv,rs,xlab="Fitted values",ylab="Residuals")
+	abline(h=0, lty=2)
+	qqnorm(rs,xlab="Normal scores",ylab="Ordered residuals")
+	qqline(rs,lty=2)
+	par(mfrow=c(1,1))
+	invisible(NULL)
+}
+
+mcheck(model)
+
+taken<-c(3,3,6,16,26,39)
+size<-c(4,6,10,40,60,100)
+
+p<-taken/size 
+ls<-log(size)
+plot(ls,p)
+abline(lm(p~ls))
+
+summary(lm(p~ls))
+
+logit<-log(p/(1-p))
+
+summary(lm(logit~ls))
+
+left<-size - taken
+y<-cbind(taken,left)
+
+model<-glm(y~ls,binomial)
+summary(model)
+
+model2<-glm(y~1,binomial)
+
+anova(model,model2)
+
+test=”Chi”anova(model,model2,test="Chi")
+
+attach(sexratio)
+names(sexratio)
+
+pmale<-male/total
+plot(genotype,pmale)
+
+y<-cbind(male,total-male)
+
+model<-glm(y~genotype,family=binomial)
+summary(model)	
+
+fitted(model)
+
+tapply(male,genotype,sum)
+tapply(total,genotype,sum)
+
+anova(model,test="Chi")   #
+
+#  Note that in R you use “quasibinomial” errors to do this
+
+anova(model,test="F")
+
+attach(germination)
+names(germination)
+
+p<-count/sample
+par(mfrow=c(1,2))
+plot(extract,p)
+plot(Orobanche,p)
+
+y<-cbind(count , sample-count)
+
+levels(Orobanche)
+
+levels(extract)
+
+model<-glm(y ~ Orobanche * extract, binomial)
+
+summary(model)
+
+33.279 / 17
+
+model2<-update(model, ~ .  Orobanche:extract)
+
+anova(model,model2,test="F")
+
+anova(model,model2,test="Chi")
+
+anova(model2,test="F")
+
+model3<-update(model2, ~ .  Orobanche)
+anova(model2,model3,test="F")
+
+coef(model3)
+
+1/(1+1/(exp(-0.5122)))
+
+1/(1+1/(exp(-0.5122+1.0574)))
+
+tapply(predict(model3),extract,mean)
+
+tapply(1/(1+1/exp(predict(model3))),extract,mean)
+
+tapply(predict(model3,type="response"),extract,mean)
+
+p<-count/sample
+
+tapply(p,extract,mean)
+
+tapply(count,extract,sum)
+
+tapply(sample,extract,sum)
+
+ct<-as.vector(tapply(count,extract,sum))
+sa<-as.vector(tapply(sample,extract,sum))
+ct/sa
+
+attach(logistic)
+names(logistic)
+
+p<-dead/n
+
+plot(logdose,p,type="n")
+
+points(logdose[product=="A"],p[product=="A"],pch=16)
+points(logdose[product=="B"],p[product=="B"])
+points(logdose[product=="C"],p[product=="C"],pch=”+”)
+
+y<-cbind(dead,n-dead)
+
+model<-glm(y~product*logdose,binomial)
+summary(model)
+
+newfac<-factor(1+(product=="B"))
+
+model2<-update(model , ~ .  product*logdose + newfac*logdose)
+
+anova(model,model2,test="Chi")
+
+summary(model2)
+
+max(logdose)
+
+min(logdose)
+
+xv<-seq(0.1,1.7,0.01)
+
+length(xv)
+
+nf<-factor(c(rep(1,161),rep(2,161)))
+
+lines(xv,predict(model2,type="response",data.frame(logdose=c(xv,xv),newfac=nf))[nf==1])
+lines(xv,predict(model2,type="response",data.frame(logdose=c(xv,xv),newfac=nf))[nf==2])
+

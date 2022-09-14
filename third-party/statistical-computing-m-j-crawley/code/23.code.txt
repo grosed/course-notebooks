@@ -1,0 +1,120 @@
+attach(asymptotic)
+names(asymptotic)
+
+plot(x,y)
+
+model<-nls(y~a-b*exp(-c*x),start=list(a=100,b=90,c=0.15))
+summary(model)
+
+xv<-seq(0,50,0.1) 
+
+lines(xv,predict(model,list(x=xv)))
+
+model2<-nls(y~a*(1-exp(-c*x)),start=list(a=100,c=0.15))
+summary(model2)
+
+anova(model,model2)
+
+attach(fishery)
+names(fishery)
+
+plot(xv,yx)
+
+model<-nls(yv~a*xv*exp(-b*xv),start=list(a=1,b=0.035))
+summary(model)
+
+lines(1:100,predict(model,list(xv=1:100)))
+
+attach(reaction)
+names(reaction)
+
+plot(enzyme,rate)
+
+model<- nls(rate~ c+a*enzyme/(1+b*enzyme),start=c(a=20,b=0.25,c=10))
+summary(model)
+
+xv<-seq(0,5,0.01)
+yv<-predict(model,list(enzyme=xv))
+lines(xy,yv)
+
+model2<- nlsList(rate~ c+a*enzyme/(1+b*enzyme)|strain,data=reaction,start=c(a=20,b=0.25,c=10))
+
+summary(model2)
+
+coef(model)
+
+coef(model)[4,2]
+
+e<-seq(0,5,0.01)
+
+plot(enzyme,rate)
+
+for (i in 1:5) {
+r<-coef(model2)[i,3]+e*coef(model2)[i,1]/(1+e*coef(model2)[i,2])
+lines(e,r,lty=i) }
+
+es<-rep(seq(0,5,0.01),5)
+
+ss<-rep(levels(strain),rep(501,5))
+
+df<-data.frame(strain=ss,enzyme=es)
+
+fit2<-predict(model2,df)
+
+st<-unique(strain)
+
+plot(enzyme,rate)
+for (i in 1:5) lines(es[ss==st[i]],fit2[ss==st[i]],lty=i+1)
+
+xyplot(rate ~ enzyme  |  strain,
+            panel = function(x, y) { 
+                  panel.grid(h = 2) 
+                  panel.xyplot(x, y,pch=16,col=1) 
+                  panel.loess(x, y, span = 1) 
+       })
+
+attach(phosphorus)
+names(phosphorus)
+
+mixed <- nlme(Height~ c+a*P/(1+b*P),  
+fixed=a+b+c~1,
+random=a+b+c~1 | Genotype,
+data=phosphorus,
+start=c(a=20,b=0.25,c=10))
+
+summary(mixed)
+
+mixed$coefficients
+
+plot(augPred(mixed))
+
+attach(nonlinear)
+names(nonlinear)
+
+growth<-groupedData(diam~time|dish)
+plot(growth)
+
+model<-nlme(diam~a+b*time/(1+c*time),
+fixed=a+b+c~1,
+random=a+b+c~1,
+data=growth,
+correlation=corAR1(),
+start=c(a=0.5,b=5,c=0.5))
+
+summary(model)
+
+anova(model,model2)
+
+coef(model)
+
+plot(augPred(model))
+
+xv<-seq(0,10,0.1)
+xv<-c(xv,xv,xv,xv,xv,xv,xv,xv,xv)
+dl<-rep(1:9,rep(101,9))
+
+plot(time,diam)
+for (i in 1:9) lines(xv[dl==i],predict(model,data.frame(dish=dl,time=xv))[dl==i])
+
+
+

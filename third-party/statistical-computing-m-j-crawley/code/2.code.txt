@@ -1,0 +1,494 @@
+3+5
+
+3*9
+
+27 / 9
+
+3^2
+
+8^(1/3)
+
+3^-2
+
+137 % / % 19
+
+floor(a/b)133 % % 19
+
+a %% b(-4)^(1/3)
+
+-4^(1/3)
+
+(-4)^2
+
+(-4)^2.00000000000001
+
+log(10)
+
+exp(1)
+
+log10(6)
+
+log(9,3)
+
+sin(pi/2)
+
+cos(pi/2)
+
+cos(pi/2)==0
+
+sin(pi/2)==1
+
+floor(5.7)
+
+ceiling(5.7)
+
+rounded <- function (x)  floor(x + 0.5)
+
+rounded(5.7)
+
+1:7
+
+seq(0, 1, 0.1)
+
+seq(5, -5, -1)
+
+seq(from = 5, by = -1, along = 1:20 )
+
+rep(5.3, 14)
+
+rep(x, time).  times xrep(1:6, 2)
+
+rep(1:6,each=3)
+
+rep(1:6,rep(3,6))
+
+gl<-function(x,y) rep(1:x,rep(y,x))
+
+gl(6,3)
+
+rep(1:6,1:6)
+
+rep(1:6,c(1,2,3,3,2,1))
+
+rep(c("monoecious","dioecious","hermaphrodite","agamic"),c(3,2,7,3))
+
+x<- 1:10
+
+x
+
+y<-c(7,5,7,2,4,6,1,6,2,3)
+
+sum(y)
+
+mean(y)
+
+max(y)
+
+min(y)
+
+range(y)
+
+x<-0:10
+
+sum(x)
+
+sum(x<5)
+
+sum(x[x<5])
+
+x<5
+
+1*(x<5)
+
+x*(x<5)
+
+ sum(x*(x<5))
+
+y<-c(8,3,5,7,6,6,8,9,2,3,9,4,10,4,11)
+
+sort(y)
+
+rev(sort(y))
+
+rev(sort(y))[2]
+
+rev(sort(y))[1:3]
+
+sum(rev(sort(y))[1:3])
+
+for (i in 1:length(y))   if(y[i] < 0 ) y[i] <- 0 
+
+y[ y< 0 ] <- 0
+
+ypos <- ifelse( y < 0 , -1, 1 )
+
+log(ifelse(y>0, y, NA))  
+
+x<- c(5,8,6,7,1,5,3)
+
+x[4]
+
+y <- x[ -1 ]
+
+y
+
+trim.mean <- function (x)    mean(sort(x)[ - c(1,length(x)) ])
+
+trim.mean(x)
+
+which(y>5)
+
+y[y>5]
+
+y>5
+
+data<-c(7,4,6,8,9,1,0,3,2,5,0)
+
+ranks<-rank(data)
+sorted<-sort(data)
+ordered<-order(data)
+
+view<-data.frame(data,ranks,sorted,ordered)
+view
+   
+sortview<-view[order(view[,2]),1:4]
+sortview
+
+attach(houses)
+houses
+
+order(Price)
+
+Location[order(Price)]
+
+Location[rev(order(Price))]
+
+y
+
+sample(y)
+ 
+sample(y)
+
+sample(y,replace=T)
+
+sample(y,replace=T)
+
+p <- c(1, 2, 3, 4, 5, 5, 4, 3, 2, 1) 
+x<-1:10
+for (i in 1 : 5){
+v<-sample(x, 4, prob=p)
+cat(v,"\n")}
+
+y
+
+y+(y==3)
+
+ys <- y[y<5]
+ys
+
+yb <- y[y>=5]
+yb
+
+sum(y> mean(y)+2 | y < mean(y)-2 )
+
+sum(y[y> mean(y)+2 | y < mean(y)-2] )
+
+list1<-c(3,5,5,6,8,9)
+list2<-c(1,3,3,3,6,7,8,8,9)
+
+intersect(list1,list2)
+
+union(list1,list2)
+
+setdiff(list1,list2)
+
+setdiff(list2,list1)
+
+list2[duplicated(list2)]
+
+duplicated(list2)
+list2
+
+list3<-c(list1,list2)
+unique(list3)
+
+sort(unique(list3))
+
+for (i in 1:5) print (i^3)
+
+ss<-0
+total<-0
+for (x in c(12,44,31,2,19) ) {
+total<-total+x
+ss<-ss+x^2
+}
+
+x<-c(12,44,31,2,19)
+total<-sum(x)
+ss<-sum(x^2)
+
+x<-0
+test<-1
+while (test>0) {
+x<-x+1
+test<-(x<6)
+print (x^2) }
+
+se
+ 
+se<-function(x) sqrt(var(x)/length(x))
+
+se
+
+y<-c(5,8,3,5,7,2,6,6,4)
+se(y)
+
+
+harmonic <- function(x) 1/mean(1/x)
+geometric <- function(x) exp(sum(log(x))/length(x))
+
+central<-function(x){
+	c1<-mean(x)
+	c2<-geometric(x)
+	c3<-harmonic(x)
+	c4<-median(x)
+	c5<-range(x)
+	
+	cat("Arithmetic mean = ",round(c1,3),"\n")
+	cat("Geometric mean  = ",round(c2,3),"\n")
+	cat("Harmonic mean   = ",round(c3,3),"\n")
+	cat("Median          = ",round(c4,3),"\n")
+	cat("Range        from ", round(c5[1],3)," to", round(c5[2],3),"\n")
+}
+
+w<-c(12,11,15,14,10,9,13,12)
+central(w)
+
+weighted.mean<-function(x,w)   sum(x*w)/sum(w)
+
+fibonacci<-function(n) {
+       a<-1
+       b<-0
+       while(n>0)
+       {swap<-a
+       a<-a+b
+       b<-swap
+       n<-n-1 }
+       b    } 
+
+for (i in 1:10)     print(fibonacci(i))
+
+central<-function(y, measure) {
+		if (measure=="Mean") mean(y) else
+		if (measure=="Geometric") exp(mean(log(y))) else
+		if (measure=="Harmonic") 1/mean(1/y) else
+		if (measure=="Median") median(y) else
+			stop("Measure not included") }
+
+x<- c(5,8,6,7,1,5,3)
+
+central(x,"Mean")
+
+central(x,"Geometric")
+
+central(x,"Harmonic")
+
+central(x,"Median")
+
+central(x,"median")
+
+central<-function(y, measure) {
+		switch(measure,
+		Mean = mean(y) ,
+		Geometric = exp(mean(log(y))) ,
+		Harmonic = 1/mean(1/y) ,
+		Median = median(y) ,
+			stop("Measure not included")    )}
+
+many.means <- function (...) {
+ 	data <- list(...)
+ 	n<- length(data)
+ 	means <- numeric(n)
+ 	vars <- numeric(n)
+ 	for  (i in 1:n) {
+ 		means[i]<-mean(data[[i]])
+ 		vars[i]<-var(data[[i]])
+ 	}
+          print(means)
+ 	print(vars)
+ 	invisible(NULL)
+      }
+
+x<-rnorm(100)
+y<-rnorm(200)
+z<-rnorm(300)
+
+many.means(x,y,z)
+
+average<-numeric(100)
+for(i in 1:100)   average[i]<-mean(runif(4))
+par(mfrow=c(1,2))
+hist(average)
+qqnorm(average)
+qqline(average)
+
+numbers<-matrix(runif(400),100)
+
+averages<-apply(numbers,1,mean)
+
+vector<-matrix(rnorm(80,12,2),8)
+apply(vector,1,sort)
+
+sex <- c( "male", "female" )
+
+string<-"the quick brown fox jumps over the lazy dog"
+
+substring(string,1,15)
+
+substring(string,36,43)
+
+substring(string,17)
+
+substring(string,1:18,35:18)
+
+abbreviate("alphabet")
+
+charmatch("med", c("mean", "median", "mode"))
+
+charmatch("m", c("mean", "median", "mode"))
+
+charmatch("my", c("mean", "median", "mode"), nomatch = -1)
+
+charmatch(c("sin", "cot"), c("cos", "sin", "tan"), nomatch = -1)
+
+attach(Parasite)
+names(Parasite)
+
+match(1,age)
+
+match(235,age,nomatch=-9)
+
+sex[match(1,age)]
+
+as.vector(sex[match(1,age)])
+
+as.vector(sex[age==1])
+
+attach(worldfloras)
+names(worldfloras)
+
+as.vector(Country[grep("*ia",as.character(Country))])
+
+as.vector(Country[grep("* *",as.character(Country))])
+
+as.vector(Country[grep("[Q-R]*",as.character(Country))])
+
+as.vector(Country[grep("?y*",as.character(Country))])
+
+as.vector(Country[grep("*[!a]",as.character(Country))])
+
+dates<- c("10 Aug", "Oct 9th", "Jan 2", "4th of July")
+
+locations<-regexpr("[0-9]+", dates)
+
+locations
+
+as.numeric(substring(dates, locations, locations+attr(locations, "match.length")-1))
+
+months<- regexpr("[A-Z][a-z]*", dates)
+
+months
+
+substring(dates, months, months+attr(months, "match.length")-1)
+
+nameX<-c("X1", "X2","X3","X4","X5","X6","X7","X8","X9","X10")
+
+nameX<-paste("X",1:10,sep="")
+nameX
+
+formula<-paste("X",1:10,sep="",collapse=" + ")
+formula
+
+y<-c( 8,  3,  5,  7,  6,  6,  8,  9,  2,  3,  9,  4, 10,  4, 11)
+
+m<-matrix(y,nrow=5)
+m
+ 
+cols.of.y<-cbind(y,y,y)
+cols.of.y
+
+L<-c(0,0.7,0,0,6,0,0.5,0,3,0,0,0.3,1,0,0,0)
+L<-matrix(L,nrow=4)
+
+L
+
+n<-c(45,20,17,3)
+n<-matrix(n,ncol=1)
+n
+
+L %*% n
+
+45*0+20*6+17*3+3*1
+
+L*n
+
+
+a<-c(1,0,3,4,8,5)
+b<-c(2,9,3,2,7,0)
+b<-matrix(b,nrow=2)
+b
+
+a*b
+
+b<-as.vector(b)
+
+a%*%b
+
+sum(a*b)
+
+A<-matrix(c(3,1,4,2),nrow=2)
+
+kv<-matrix(c(12,8),nrow=2)
+kv
+
+solve(A,kv)
+
+? chol
+
+sapply(1:10,function(x) x^2)
+
+(1:10)^2
+
+attach(sapdecay)
+names(sapdecay)
+
+sumsq <- function(a,xv=x,yv=y) 
+              { y0 <- exp(-a*xv) 
+                sum((yv-y0)^2) } 
+
+lm(log(y)~x)
+
+a<-seq(0.01,0.2,.005)
+
+plot(a,sapply(a,sumsq),type="l")
+
+a[min(sapply(a,sumsq))==sapply(a,sumsq)]
+
+plot(x,y)
+xv<-seq(0,50,0.1)
+lines(xv,exp(-0.055*xv))
+
+negbin<-function(x) (1+u/k)^(-k)*(u/(u+k))^x*gamma(k+x)/(factorial(x)*gamma(k))
+
+u<-1.0042
+k<-0.58
+barplot(sapply(0:12,negbin),names=as.character(0:12))
+		
+chaos<-function (lambda) {
+	x<-numeric(200)
+	x[1]<-0.6
+	for (t in 2 : 200)  x[t] <- lambda * x[t-1] * (1 - x[t-1]) 
+	x[191:200] }	
+		
+plot(c(2,4),c(0,1),type="n",xlab="lambda",ylab="population")
+for(lam in seq(2,4,0.01)) points(rep(lam,10),sapply(lam,chaos),pch=16,cex=0.5)
