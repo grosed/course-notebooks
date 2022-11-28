@@ -30,7 +30,7 @@ mkdir /home/<username>/luna
 #Next, run the following line in terminal replacing <username> with your actual username.
 
 
-mount.cifs //luna.lancs.ac.uk/FST/MA/Stor-i/<username> /luna 
+mount.cifs //luna.lancs.ac.uk/FST/MA/Stor-i/<username> ${HOME}/luna 
 
 #This will mount your new storage to the root directory /luna.
 
