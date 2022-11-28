@@ -23,6 +23,10 @@ replace /luna with /home/<username>/luna
 
 mkdir /home/<username>/luna
 
+# You should now have a line that looks like (in this case, the <username> is
+
+//luna.lancs.ac.uk/FST/MA/Stor-i/grosedj1 /home/grosedj1/luna cifs domain=LANCS,noauto,rw,users,sec=krb5,vers=3.1.1 0 0
+
 #Next, run the following line in terminal replacing <username> with your actual username.
 
 
