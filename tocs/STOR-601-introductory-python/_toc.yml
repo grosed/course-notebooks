@@ -1,0 +1,19 @@
+format: jb-book
+root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+chapters:
+  - file: variables-expressions-statements  
+  - file: functions
+  - file: lists
+  - file: flow-control-checkpoint
+  - file: tuples
+  - file: dictionaries
+  - file: file-io
+  - file: numpy.ipynb
+  - file: ggplot-plotnine.ipynb
+  - file: more-data-structures.ipynb
+  - file: further-exercises.ipynb
+  - file: further-reading.ipynb
+  - file: python-summary.ipynb
+  - file: python-utilities
