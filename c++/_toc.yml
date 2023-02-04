@@ -1,0 +1,17 @@
+format: jb-book
+root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+chapters:
+  - file: getting-started
+  - file: variables-built-in-type-initialisation
+  - file: strings
+  - file: operators
+  - file: iteration
+  - file: conditional-expressions
+  - file: functions
+  - file: linear-sequences
+  - file: associative-containers
+  - file: structures
+  - file: utilities
+  - file: c++-for-python-programmers-assessment
