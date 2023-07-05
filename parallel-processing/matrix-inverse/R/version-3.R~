@@ -1,0 +1,11 @@
+args = commandArgs(trailingOnly=TRUE)
+
+n <- args[1]
+m <- args[2]
+s <- args[3]
+
+for(i in 1:m)
+{
+   X <- matrix(runif(n^2),n,n)
+   Y <- solve(X)
+}
