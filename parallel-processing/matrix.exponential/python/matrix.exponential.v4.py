@@ -31,10 +31,6 @@ np.save(fileX,X)
 np.save(fileY,Y)
 
 
-print(Y)
-
-import scipy
-print(scipy.linalg.expm(X))
 
 
 
