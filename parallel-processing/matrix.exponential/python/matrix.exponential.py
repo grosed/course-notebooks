@@ -15,8 +15,4 @@ for k in range(1,m) :
     Z = np.matmul(Z,X)/k
     Y = np.add(Y,Z)
 
-print(Y)
 
-import scipy
-
-print(scipy.linalg.expm(X))
