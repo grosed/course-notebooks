@@ -1,0 +1,14 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+- file: intro
+- file: content
+  sections:
+    - file: installing-python-and-jupyter.ipynb
+    - file: sample-session.ipynb
+    - file: data-types.ipynb
+    - file: control-structures.ipynb
+    - file: functions
+    - file: ggplot
+    - file: maximum-likelihood
+    
