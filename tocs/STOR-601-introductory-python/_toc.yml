@@ -13,7 +13,9 @@ chapters:
   - file: numpy.ipynb
   - file: ggplot-plotnine.ipynb
   - file: more-data-structures.ipynb
+  - file: python-class-introduction.ipynb
   - file: further-exercises.ipynb
   - file: further-reading.ipynb
   - file: python-summary.ipynb
   - file: python-utilities
+  - file: STOR-601-stable-marriage-assessment-v2
