@@ -1,0 +1,39 @@
+
+struct Point
+{
+    double x;
+    double y;
+    Point(double _x = 0.0, double _y = 0.0)
+    {
+        x = _x;
+        y = _y;   
+    }
+    Point operator+(Point p)
+    {
+       return Point(x + p.x,y + p.y);
+    }
+};
+
+
+#include <iostream.h>
+
+
+
+
+
+int main()
+{
+
+
+  Point A(1.3,2.7);
+  Point B(-6.2,0.1);
+
+  Point C = A + B;
+
+  std::cout << "(" << C.x << "," << C.y,")" << std::endl;
+  
+
+  
+
+  return 0;
+}
