@@ -1,0 +1,5 @@
+useDynLib(praxi, .registration=TRUE)
+import(methods, Rcpp)
+exportPattern("^[[:alpha:]]+")
+
+
