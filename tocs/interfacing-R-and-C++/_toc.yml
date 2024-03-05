@@ -5,3 +5,4 @@ options:  # The options key will be applied to all chapters, but not sub-section
 chapters:
   - file: sourceCpp
   - file: marshalling-data
+  - file: minimal-Rcpp-package
