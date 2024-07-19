@@ -1,14 +1,11 @@
-# Table of content
-# Learn more at https://jupyterbook.org/customize/toc.html
-#
-- file: intro
-- file: content
-  sections:
-    - file: installing-python-and-jupyter.ipynb
-    - file: sample-session.ipynb
-    - file: data-types.ipynb
-    - file: control-structures.ipynb
-    - file: functions
-    - file: ggplot
-    - file: maximum-likelihood
-    
+format: jb-book
+root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+chapters:
+  - file: sample-session
+  - file: data-types
+  - file: control-structures
+  - file: functions
+  - file: ggplot
+  - file: maximum-likelihood

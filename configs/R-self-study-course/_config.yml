@@ -9,6 +9,7 @@ logo: data_structures_1024x576.png
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  allow_errors: true 
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -30,3 +31,5 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+
