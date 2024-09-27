@@ -4,18 +4,11 @@ options:  # The options key will be applied to all chapters, but not sub-section
   numbered: True
 chapters:
   - file: variables-expressions-statements  
-  - file: functions
   - file: lists
+  - file: functions
   - file: flow-control-checkpoint
   - file: tuples
   - file: dictionaries
-  - file: file-io
-  - file: numpy.ipynb
-  - file: ggplot-plotnine.ipynb
-  - file: more-data-structures.ipynb
-  - file: python-class-introduction.ipynb
-  - file: further-exercises.ipynb
-  - file: further-reading.ipynb
-  - file: python-summary.ipynb
-  - file: python-utilities
-  - file: STOR-601-stable-marriage-assessment-v2
+  - file: more-data-structures
+  - file: python-class-introduction
+  - file: python-summary
