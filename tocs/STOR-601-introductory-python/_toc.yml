@@ -5,8 +5,8 @@ options:  # The options key will be applied to all chapters, but not sub-section
 chapters:
   - file: variables-expressions-statements  
   - file: lists
-  - file: functions
   - file: flow-control-checkpoint
+  - file: functions
   - file: tuples
   - file: dictionaries
   - file: more-data-structures
